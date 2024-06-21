@@ -1,31 +1,35 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { getTournament, Tournament } from './apiClient';
+import { GroupCard } from './GroupCard';
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+export const App = () => {
+  const [tournament, setTournament] = useState<Tournament | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const tournament = await getTournament('euro', 2020);
+      setTournament(tournament);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank"></a>
-        <a href="https://react.dev" target="_blank"></a>
-      </div>
+        { tournament && (
+          <div>
+            <h1>{tournament.name}</h1>
 
-      <h1>Vite + React</h1>
+            {tournament.groups.map(group => <GroupCard group={group} key={group.name} />)}
+          </div>
+        )}
 
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        { !tournament && (
+          <p>Loading</p>
+        )}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
-
-export default App
