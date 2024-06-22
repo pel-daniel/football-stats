@@ -44,10 +44,10 @@ export interface ApiMatch1 extends ApiMatchBase {
   score2i: number;
 }
 
-type ApiMatch2 = ApiMatchBase & {
-  ht: [number, number];
-  ft: [number, number];
-};
+// type ApiMatch2 = ApiMatchBase & {
+//   ht: [number, number];
+//   ft: [number, number];
+// };
 
 interface ApiRound {
   name: string;
