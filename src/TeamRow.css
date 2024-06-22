@@ -9,5 +9,27 @@
 }
 
 .team-name {
-  width: 133px;
+  width: 15ch;
+}
+
+.team-points {
+  width: 2ch;
+  text-align: right;
+}
+
+.match {
+  height: 16px;
+  width: 16px;
+}
+
+.match-win {
+  background-color: #22c55ed4;
+}
+
+.match-lose {
+  background-color: #ef4444d4;
+}
+
+.match-draw {
+  background-color: #cbd5e1;
 }

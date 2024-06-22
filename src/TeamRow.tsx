@@ -14,10 +14,11 @@ export const TeamRow = ({ team }: { team: Team }) => {
       </div>
 
       <div className="team-name">{team.name}</div>
-      <div>{team.points}</div>
+      <div className="team-points">{team.points}</div>
+
       <div className="flex">
         {team.matchResults.map((result, index) =>
-          <div key={index}>{result}</div>
+          <div key={index} className={`match match-${result}`}></div>
         )}
       </div>
     </div>

@@ -65,6 +65,6 @@ button:focus-visible {
 
 .flex {
   display: flex;
-  vertical-align: middle;
+  align-items: center;
   gap: 4px;
 }
