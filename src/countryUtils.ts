@@ -249,4 +249,13 @@ export const iso3ToIso2 = {
   UKR: "UA",
   QAT: "QA",
   MOZ: "MZ",
+  SUI: "CH",
+  WAL: "GB-WLS",
+  DEN: "DK",
+  NED: "NL",
+  ENG: "GB-ENG",
+  CRO: "HR",
+  SCO: "GB-SCT",
+  POR: "PT",
+  GER: "DE"
 };
