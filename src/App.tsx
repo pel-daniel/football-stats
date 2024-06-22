@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getTournament, Tournament } from './apiClient';
 import { GroupCard } from './GroupCard';
+
 import './App.css'
 
 export const App = () => {
@@ -22,7 +23,11 @@ export const App = () => {
           <div>
             <h1>{tournament.name}</h1>
 
-            {tournament.groups.map(group => <GroupCard group={group} key={group.name} />)}
+            <div className="groups">
+              {tournament.groups.map(group =>
+                <GroupCard group={group} key={group.name} />
+              )}
+            </div>
           </div>
         )}
 
