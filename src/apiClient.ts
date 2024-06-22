@@ -1,77 +1,136 @@
+import { getScores } from "./tournamentUtils";
+
 const baseUrl = 'https://raw.githubusercontent.com/openfootball';
 
-interface Team {
+export interface ApiTeam {
   name: string;
   code: string;
 }
 
-interface Match {
-  date: string;
-  time: string;
-  team1: Team;
-  team2: Team;
-  score: Record<Team['code'], number>;
-}
+// interface Match {
+//   date: string;
+//   time: string;
+//   team1: ApiTeam;
+//   team2: ApiTeam;
+//   score: Record<ApiTeam['code'], number>;
+// }
 
-export interface TeamMatches {
-  name: Team['name'];
-  code: Team['code'];
+export interface TeamMatches extends ApiTeam {
   points: number;
-  matches: Match[];
+  matches: ApiMatch1[];
 }
 
-interface TeamRounds {
+interface ApiRound {
   name: string;
   rounds: TeamMatches[];
 }
 
-export interface Group {
+export interface ApiGroup {
   name: string;
   teams: TeamMatches[];
+}
+
+interface ApiMatchBase {
+  date: string;
+  time: string;
+  team1: ApiTeam;
+  team2: ApiTeam;
+}
+
+export interface ApiMatch1 extends ApiMatchBase {
+  score1: number;
+  score1i: number;
+  score2: number;
+  score2i: number;
+}
+
+type ApiMatch2 = ApiMatchBase & {
+  ht: [number, number];
+  ft: [number, number];
+};
+
+interface ApiRound {
+  name: string;
+  matches: ApiMatch1[];
+}
+
+export interface ApiTournamentMatches {
+  name: string;
+  rounds: ApiRound[];
+}
+
+interface ApiTournamentGroups {
+  name: string;
+  groups: ApiGroup[];
+}
+
+type MatchResult = 'win' | 'lose' | 'draw';
+
+interface TeamScore {
+  points: number;
+  for: number;
+  against: number;
+  difference: number;
+  matchResults: MatchResult[];
+}
+
+export type TeamScores = Record<ApiTeam['code'], TeamScore>;
+
+export interface Team extends ApiTeam, TeamScore {
+  matches: ApiMatch1[];
+}
+
+export interface Group {
+  name: string;
+  teams: Team[];
 }
 
 export interface Tournament {
   name: string;
   groups: Group[];
+  matches: ApiMatch1[];
 }
 
 export const getTournament = async (tournamentName: string, year: number): Promise<Tournament | null> => {
-  const tournamentResponse = await fetch(`${baseUrl}/${tournamentName}.json/master/${year}/${tournamentName}.groups.json`);
-  const matchesResponse = await fetch(`${baseUrl}/${tournamentName}.json/master/${year}/${tournamentName}.json`);
+  const tournamentGroupsResponse = await fetch(`${baseUrl}/${tournamentName}.json/master/${year}/${tournamentName}.groups.json`);
+  const tournamentMatchesResponse = await fetch(`${baseUrl}/${tournamentName}.json/master/${year}/${tournamentName}.json`);
 
-  if(tournamentResponse.ok && matchesResponse.ok) {
-    const tournament = await tournamentResponse.json();
-    const matches = await matchesResponse.json();
+  if(tournamentGroupsResponse.ok && tournamentMatchesResponse.ok) {
+    const tournamentGroups: ApiTournamentGroups = await tournamentGroupsResponse.json();
+    const tournamentMatches: ApiTournamentMatches = await tournamentMatchesResponse.json();
+    const matches = tournamentMatches.rounds.flatMap(round => round.matches);
+    const scores = getScores(tournamentMatches);
 
-    return {
-      name: tournament.name,
-      groups: tournament.groups.map(apiGroup => (
+    const tournament = {
+      name: tournamentGroups.name,
+      matches,
+      groups: tournamentGroups.groups.map(apiGroup => (
         {
           name: apiGroup.name,
           teams: apiGroup.teams.map(apiTeam => (
             {
               name: apiTeam.name,
               code: apiTeam.code,
-              points: 0,
-              matches: matches.rounds.flatMap(round =>
-                round.matches.
-                  filter(match => match.team1.code === apiTeam.code || match.team2.code === apiTeam.code)).
-                  map(match => (
-                    {
-                      ...match,
-                      score: {
-                        [match.team1.code]: match.score1,
-                        [match.team2.code]: match.score2,
-                        // [match.team1.code]: match.score.ft[0],
-                        // [match.team2.code]: match.score.ft[1],
-                      }
-                    }
-                  )),
+              ...scores[apiTeam.code],
+              matches: matches.filter(match => match.team1.code === apiTeam.code || match.team2.code === apiTeam.code)
+                  // map(match => (
+                  //   {
+                  //     ...match,
+                  //     score: {
+                  //       [match.team1.code]: match.score1,
+                  //       [match.team2.code]: match.score2,
+                  //       // [match.team1.code]: match.score.ft[0],
+                  //       // [match.team2.code]: match.score.ft[1],
+                  //     }
+                  //   }
+                  // )),
             }
           ))
         }
       )),
     };
+
+    return tournament;
   }
 
   return null;

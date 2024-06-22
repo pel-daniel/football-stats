@@ -6,7 +6,9 @@ export const GroupCard = ({ group }: { group: Group }) => {
     <div>
       <h2>{group.name}</h2>
 
-      {group.teams.map(team => <TeamRow team={team} key={team.name} />)}
+      <div>
+        {group.teams.map(team => <TeamRow team={team} key={team.name} />)}
+      </div>
     </div>
   )
 }
