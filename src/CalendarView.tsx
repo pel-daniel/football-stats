@@ -1,3 +1,5 @@
+import classNames from "classnames";
+
 import { ApiMatch, Tournament } from "./apiClient";
 import { MatchCard } from "./MatchCard";
 import { getGroupIndex } from "./tournamentUtils";
@@ -11,7 +13,8 @@ export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
     (match: ApiMatch) => match.date
   );
   const daysOfWeek = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-  tournament.groups
+  const today = new Date();
+  const timezone = today.toLocaleDateString(undefined, {day:'2-digit', timeZoneName: 'short' }).substring(4);
 
   return (
     <div className="calendar">
@@ -21,15 +24,15 @@ export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
 
       <div className="date-grid">
         {Object.entries(matchesByDate).map(([key, matches]) => {
-          const date = new Date(key);
+          const date = new Date(`${key} ${timezone}`);
 
           return (
             <div
-              className="date-cell"
-              style={{ gridColumn: ((date.getDay() + 1) % 7) + 1 }}
+              className={classNames("date-cell", { "date-cell-today": today.toDateString() === date.toDateString() })}
+              style={{ gridColumn: ((date.getDay()) % 7) + 1 }}
               key={key}
             >
-              <div className="date-cell-day">{date.getDate() + 1}</div>
+              <div className="date-cell-day">{date.getDate()}</div>
 
               <div className="flex-column">
                 {matches.map((match, index) =>

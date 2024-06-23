@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 4px;
 
-  background-color: color-mix(in srgb, var(--color-group) 23%, transparent);
+  border-left: 4px solid var(--color-group);
   border-radius: 2px;
   padding: 2px 5px;
 }
