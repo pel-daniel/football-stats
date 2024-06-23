@@ -1,12 +1,17 @@
-import { ApiMatch } from "./apiClient";
+import { ApiMatch, Tournament } from "./apiClient";
 import { MatchCard } from "./MatchCard";
+import { getGroupIndex } from "./tournamentUtils";
 
 import './CalendarView.css';
 
-export const CalendarView = ({ matches }: { matches: ApiMatch[] }) => {
+export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
   // @ts-ignore:next-line
-  const matchesByDate: Record<string, ApiMatch[]> = Object.groupBy(matches, (match: ApiMatch) => match.date)
+  const matchesByDate: Record<string, ApiMatch[]> = Object.groupBy(
+    tournament.matches,
+    (match: ApiMatch) => match.date
+  );
   const daysOfWeek = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+  tournament.groups
 
   return (
     <div className="calendar">
@@ -19,12 +24,20 @@ export const CalendarView = ({ matches }: { matches: ApiMatch[] }) => {
           const date = new Date(key);
 
           return (
-            <div className="date-cell" style={{ gridColumn: ((date.getDay() + 1) % 7) + 1 }} key={key}>
+            <div
+              className="date-cell"
+              style={{ gridColumn: ((date.getDay() + 1) % 7) + 1 }}
+              key={key}
+            >
               <div className="date-cell-day">{date.getDate() + 1}</div>
 
               <div className="flex-column">
                 {matches.map((match, index) =>
-                  <MatchCard match={match} key={index} />
+                  <MatchCard
+                    match={match}
+                    groupIndex={getGroupIndex(match.team1.code, tournament.groups)}
+                    key={index}
+                  />
                 )}
               </div>
             </div>
@@ -32,5 +45,5 @@ export const CalendarView = ({ matches }: { matches: ApiMatch[] }) => {
         })}
       </div>
     </div>
-  )
+  );
 };

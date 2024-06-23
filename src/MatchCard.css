@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+
+  background-color: color-mix(in srgb, var(--color-group) 23%, transparent);
+  border-radius: 2px;
+  padding: 2px 5px;
 }
 
 .calendar-team-name {

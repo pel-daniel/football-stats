@@ -72,6 +72,7 @@ export type TeamScores = Record<ApiTeam['code'], TeamScore>;
 
 export interface Team extends ApiTeam, TeamScore {
   matches: ApiMatch[];
+  group: string;
 }
 
 export interface Group {
@@ -106,6 +107,7 @@ export const getTournament = async (tournamentName: string, year: number, repo: 
               name: apiTeam.name,
               code: apiTeam.code,
               ...scores[apiTeam.code],
+              group: apiGroup.name,
               matches: matches.filter(match => match.team1.code === apiTeam.code || match.team2.code === apiTeam.code)
                   // map(match => (
                   //   {

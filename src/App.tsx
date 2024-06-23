@@ -29,11 +29,11 @@ export const App = () => {
           <h1>{tournament.name}</h1>
 
           <div className="layout">
-            <CalendarView matches={tournament.matches} />
+            <CalendarView tournament={tournament} />
 
             <div className="groups">
-              {tournament.groups.map(group =>
-                <GroupCard group={group} key={group.name} />
+              {tournament.groups.map((group, index) =>
+                <GroupCard group={group} index={index + 1} key={group.name} />
               )}
             </div>
           </div>

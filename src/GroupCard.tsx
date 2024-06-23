@@ -1,12 +1,15 @@
+import { CSSProperties } from "react";
 import { TeamRow } from "./TeamRow"
 import { Group } from "./apiClient"
 
 import './GroupCard.css';
 
-export const GroupCard = ({ group }: { group: Group }) => {
+export const GroupCard = ({ group, index }: { group: Group, index: number }) => {
   return (
     <div>
-      <h2>{group.name}</h2>
+      <h3 className="group-card-name" style={{ "--color-group": `var(--color-group-${index})` } as CSSProperties}>
+        {group.name}
+      </h3>
 
       <div className="group-card">
         {

@@ -1,11 +1,11 @@
 :root {
   --color-group-1: #2dd4bf;
   --color-group-2: #fb923c;
-  --color-group-3: #a3e635;
-  --color-group-4: #a78bfa;
-  --color-group-5: #facc15;
-  --color-group-6: #38bdf8;
-  --color-group-7: #f472b6;
+  --color-group-3: #a78bfa;
+  --color-group-4: #facc15;
+  --color-group-5: #38bdf8;
+  --color-group-6: #f472b6;
+  --color-group-7: #a3e635;
 }
 
 .layout {

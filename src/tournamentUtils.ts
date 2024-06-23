@@ -1,4 +1,4 @@
-import { ApiTournamentMatches, TeamScores } from "./apiClient";
+import { ApiTournamentMatches, Group, TeamScores } from "./apiClient";
 
 export const getScores = (tournamentMatches: ApiTournamentMatches): TeamScores => {
   const teamScores: TeamScores = {};
@@ -69,4 +69,8 @@ export const getScores = (tournamentMatches: ApiTournamentMatches): TeamScores =
   });
 
   return teamScores;
+}
+
+export const getGroupIndex = (code: string, groups: Group[]) => {
+  return groups.findIndex(group => group.teams.some(team => team.code === code)) + 1;
 }
