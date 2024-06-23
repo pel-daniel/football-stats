@@ -1,0 +1,22 @@
+.calendar {
+  width: 800px;
+}
+
+.day-of-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.date-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.date-cell {
+  font-size: 14px;
+  padding: 6px;
+}
+
+.date-cell-day {
+  margin-bottom: 4px;
+}

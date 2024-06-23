@@ -68,8 +68,19 @@ button:focus-visible {
   }
 }
 
+#root {
+  width: 1280px;
+  margin: 0 auto;
+}
+
 .flex {
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }

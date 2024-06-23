@@ -1,9 +1,11 @@
-#root {
-  width: 1280px;
-  margin: 0 auto;
+.layout {
+  display: flex;
+  gap: 80px;
 }
 
 .groups {
+  width: 400px;
+
   display: grid;
   gap: 12px;
 }

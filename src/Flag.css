@@ -1,0 +1,10 @@
+.flag {
+  height: 20px;
+  width: 30px;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 2px;
+  box-shadow: 2px 1px 3px #9ca3af;
+}

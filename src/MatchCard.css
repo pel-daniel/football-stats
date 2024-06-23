@@ -1,0 +1,9 @@
+.match {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calendar-team-name {
+  width: 10ch;
+}
