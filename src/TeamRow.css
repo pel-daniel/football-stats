@@ -25,3 +25,7 @@
 .match-result-draw {
   background-color: #cbd5e1;
 }
+
+.match-result-pending {
+  background: repeating-linear-gradient(-45deg, #64748b, #64748b 2px, #ffffff 2px, #ffffff 5px);
+}

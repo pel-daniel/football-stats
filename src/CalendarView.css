@@ -1,15 +1,15 @@
 .calendar {
-  width: 800px;
+  width: 1050px;
 }
 
 .day-of-week {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, 150px);
 }
 
 .date-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, 150px);
 }
 
 .date-cell {

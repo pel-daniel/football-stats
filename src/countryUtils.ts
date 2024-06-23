@@ -257,5 +257,9 @@ export const iso3ToIso2 = {
   CRO: "HR",
   SCO: "GB-SCT",
   POR: "PT",
-  GER: "DE"
+  GER: "DE",
+  CHI: "CL",
+  URU: "UY",
+  PAR: "PY",
+  CRC: "CR",
 };

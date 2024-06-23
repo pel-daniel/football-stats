@@ -27,17 +27,21 @@ interface ApiMatchBase {
   team2: ApiTeam;
 }
 
-export interface ApiMatch extends ApiMatchBase {
-  score1: number;
-  score1i: number;
-  score2: number;
-  score2i: number;
+// export interface ApiMatch extends ApiMatchBase {
+//   score1: number;
+//   score1i: number;
+//   score2: number;
+//   score2i: number;
+// }
+
+interface ApiScore {
+  ht?: [number, number];
+  ft?: [number, number];
 }
 
-// export interface ApiMatch extends ApiMatchBase {
-//   ht: [number, number];
-//   ft: [number, number];
-// }
+export interface ApiMatch extends ApiMatchBase {
+  score: ApiScore;
+}
 
 interface ApiRound {
   name: string;
@@ -54,7 +58,7 @@ interface ApiTournamentGroups {
   groups: ApiGroup[];
 }
 
-type MatchResult = 'win' | 'lose' | 'draw';
+type MatchResult = 'win' | 'lose' | 'draw' | 'pending';
 
 interface TeamScore {
   points: number;

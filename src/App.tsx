@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getTournament, Tournament } from './apiClient';
 import { CalendarView } from './CalendarView';
-// import { GroupCard } from './GroupCard';
+import { GroupCard } from './GroupCard';
 
 import './App.css'
 
@@ -31,11 +31,11 @@ export const App = () => {
           <div className="layout">
             <CalendarView matches={tournament.matches} />
 
-            {/* <div className="groups">
+            <div className="groups">
               {tournament.groups.map(group =>
                 <GroupCard group={group} key={group.name} />
               )}
-            </div> */}
+            </div>
           </div>
         </div>
       )}
