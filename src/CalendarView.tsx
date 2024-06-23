@@ -4,6 +4,7 @@ import { MatchCard } from "./MatchCard";
 import './CalendarView.css';
 
 export const CalendarView = ({ matches }: { matches: ApiMatch1[] }) => {
+  // @ts-ignore:next-line
   const matchesByDate: Record<string, ApiMatch1[]> = Object.groupBy(matches, (match: ApiMatch1) => match.date)
   const daysOfWeek = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
