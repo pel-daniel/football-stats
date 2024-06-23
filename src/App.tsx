@@ -7,10 +7,15 @@ import './App.css'
 
 export const App = () => {
   const [tournament, setTournament] = useState<Tournament | null>(null);
+  const query = new URLSearchParams(window.location.search);
 
   useEffect(() => {
     const fetchData = async () => {
-      const tournament = await getTournament('euro', 2020);
+      const tournamentName = query.get("tournament") || "euro";
+      const year = parseInt(query.get('year') || new Date().getFullYear().toString());
+      const repo = query.get("repo") || tournamentName;
+      const tournament = await getTournament(tournamentName, year, repo);
+
       setTournament(tournament);
     };
 

@@ -1,9 +1,9 @@
 import { Flag } from "./Flag";
-import { ApiMatch1 } from "./apiClient";
+import { ApiMatch } from "./apiClient";
 
 import "./MatchCard.css";
 
-export const MatchCard = ({ match }: { match: ApiMatch1 }) => {
+export const MatchCard = ({ match }: { match: ApiMatch }) => {
   return (
     <div className="match">
       <div className="flex">

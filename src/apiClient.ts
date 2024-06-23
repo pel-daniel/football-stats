@@ -15,19 +15,9 @@ export interface ApiTeam {
 //   score: Record<ApiTeam['code'], number>;
 // }
 
-export interface TeamMatches extends ApiTeam {
-  points: number;
-  matches: ApiMatch1[];
-}
-
-interface ApiRound {
-  name: string;
-  rounds: TeamMatches[];
-}
-
 export interface ApiGroup {
   name: string;
-  teams: TeamMatches[];
+  teams: ApiTeam[];
 }
 
 interface ApiMatchBase {
@@ -37,21 +27,21 @@ interface ApiMatchBase {
   team2: ApiTeam;
 }
 
-export interface ApiMatch1 extends ApiMatchBase {
+export interface ApiMatch extends ApiMatchBase {
   score1: number;
   score1i: number;
   score2: number;
   score2i: number;
 }
 
-// type ApiMatch2 = ApiMatchBase & {
+// export interface ApiMatch extends ApiMatchBase {
 //   ht: [number, number];
 //   ft: [number, number];
-// };
+// }
 
 interface ApiRound {
   name: string;
-  matches: ApiMatch1[];
+  matches: ApiMatch[];
 }
 
 export interface ApiTournamentMatches {
@@ -77,7 +67,7 @@ interface TeamScore {
 export type TeamScores = Record<ApiTeam['code'], TeamScore>;
 
 export interface Team extends ApiTeam, TeamScore {
-  matches: ApiMatch1[];
+  matches: ApiMatch[];
 }
 
 export interface Group {
@@ -88,12 +78,12 @@ export interface Group {
 export interface Tournament {
   name: string;
   groups: Group[];
-  matches: ApiMatch1[];
+  matches: ApiMatch[];
 }
 
-export const getTournament = async (tournamentName: string, year: number): Promise<Tournament | null> => {
-  const tournamentGroupsResponse = await fetch(`${baseUrl}/${tournamentName}.json/master/${year}/${tournamentName}.groups.json`);
-  const tournamentMatchesResponse = await fetch(`${baseUrl}/${tournamentName}.json/master/${year}/${tournamentName}.json`);
+export const getTournament = async (tournamentName: string, year: number, repo: string): Promise<Tournament | null> => {
+  const tournamentGroupsResponse = await fetch(`${baseUrl}/${repo}.json/master/${year}/${tournamentName}.groups.json`);
+  const tournamentMatchesResponse = await fetch(`${baseUrl}/${repo}.json/master/${year}/${tournamentName}.json`);
 
   if(tournamentGroupsResponse.ok && tournamentMatchesResponse.ok) {
     const tournamentGroups: ApiTournamentGroups = await tournamentGroupsResponse.json();

@@ -1,11 +1,11 @@
-import { ApiMatch1 } from "./apiClient";
+import { ApiMatch } from "./apiClient";
 import { MatchCard } from "./MatchCard";
 
 import './CalendarView.css';
 
-export const CalendarView = ({ matches }: { matches: ApiMatch1[] }) => {
+export const CalendarView = ({ matches }: { matches: ApiMatch[] }) => {
   // @ts-ignore:next-line
-  const matchesByDate: Record<string, ApiMatch1[]> = Object.groupBy(matches, (match: ApiMatch1) => match.date)
+  const matchesByDate: Record<string, ApiMatch[]> = Object.groupBy(matches, (match: ApiMatch) => match.date)
   const daysOfWeek = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
   return (
