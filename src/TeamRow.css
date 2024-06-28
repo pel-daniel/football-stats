@@ -23,11 +23,12 @@
 }
 
 .match-result {
+  box-sizing: border-box;
   height: 20px;
   width: 20px;
 
-  border-radius: 2px;
   position: relative;
+  border-radius: 2px;
 
   .flag {
     position: absolute;
@@ -53,6 +54,14 @@
 
 .match-result-pending {
   background: repeating-linear-gradient(-45deg, #64748b, #64748b 2px, #ffffff 2px, #ffffff 5px);
+}
+
+.match-result-today {
+  border: 2px solid #ffdc5b;
+}
+
+.match-result-tomorrow {
+  border: 2px solid rgba(0, 0, 255, 0.832);
 }
 
 .match-result2 {
