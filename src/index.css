@@ -85,3 +85,7 @@ button:focus-visible {
   flex-direction: column;
   gap: 12px;
 }
+
+.mb-12 {
+  margin-bottom: 12px;
+}

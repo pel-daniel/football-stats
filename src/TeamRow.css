@@ -16,7 +16,7 @@
   gap: 16px;
 }
 
-.match-result-row:hover {
+.match-row:hover {
   .flag {
     opacity: 1;
   }

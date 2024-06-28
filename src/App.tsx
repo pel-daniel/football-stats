@@ -8,14 +8,13 @@ import './App.css'
 export const App = () => {
   const [tournament, setTournament] = useState<Tournament | null>(null);
   const query = new URLSearchParams(window.location.search);
+  const tournamentName = query.get("tournament") || "euro";
+  const year = parseInt(query.get('year') || new Date().getFullYear().toString());
+  const repo = query.get("repo") || tournamentName;
 
   useEffect(() => {
     const fetchData = async () => {
-      const tournamentName = query.get("tournament") || "euro";
-      const year = parseInt(query.get('year') || new Date().getFullYear().toString());
-      const repo = query.get("repo") || tournamentName;
       const tournament = await getTournament(tournamentName, year, repo);
-
       setTournament(tournament);
     };
 
@@ -26,7 +25,14 @@ export const App = () => {
     <div>
       { tournament && (
         <div>
-          <h1>{tournament.name}</h1>
+          <div className="flex mb-12">
+            <img
+              src={`./tournamentLogos/${repo}.webp`}
+              alt="tournament logo"
+              className="tournament-logo"
+            />
+            <h1>{tournament.name}</h1>
+          </div>
 
           <div className="layout">
             {/* <CalendarView tournament={tournament} /> */}

@@ -19,3 +19,7 @@
   display: grid;
   gap: 16px;
 }
+
+.tournament-logo {
+  height: 60px;
+}
