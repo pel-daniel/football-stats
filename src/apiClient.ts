@@ -58,7 +58,7 @@ interface ApiTournamentGroups {
   groups: ApiGroup[];
 }
 
-type MatchResult = 'win' | 'lose' | 'draw' | 'pending';
+export type MatchResult = 'win' | 'lose' | 'draw' | 'pending';
 
 interface TeamScore {
   points: number;

@@ -1,4 +1,4 @@
-import { ApiTournamentMatches, Group, TeamScores } from "./apiClient";
+import { ApiMatch, ApiTournamentMatches, Group, MatchResult, Team, TeamScores } from "./apiClient";
 
 export const getScores = (tournamentMatches: ApiTournamentMatches): TeamScores => {
   const teamScores: TeamScores = {};
@@ -69,8 +69,27 @@ export const getScores = (tournamentMatches: ApiTournamentMatches): TeamScores =
   });
 
   return teamScores;
-}
+};
+
+export const getScore = (match: ApiMatch, team: Team): MatchResult => {
+  // const score1 = match.score1;
+  // const score2 = match.score2;
+  const score1 = match.score.ft && match.score.ft[0];
+  const score2 = match.score.ft && match.score.ft[1];
+  const score = match.team1.code === team.code ? score1 : score2;
+  const scoreAgainst = match.team1.code !== team.code ? score1 : score2;
+
+  if(score === undefined || scoreAgainst === undefined) {
+    return 'pending';
+  } else if(score > scoreAgainst) {
+    return 'win';
+  } else if(scoreAgainst > score) {
+    return 'lose';
+  } else {
+    return 'draw';
+  }
+};
 
 export const getGroupIndex = (code: string, groups: Group[]) => {
   return groups.findIndex(group => group.teams.some(team => team.code === code)) + 1;
-}
+};

@@ -7,11 +7,27 @@
   text-align: right;
 }
 
+.match-row:hover {
+  background-color: color-mix(in srgb, var(--color-group) 10%, transparent);
+}
+
+.match-result-row {
+  display: flex;
+  gap: 16px;
+}
+
 .match-result {
-  height: 16px;
-  width: 16px;
+  height: 20px;
+  width: 20px;
 
   border-radius: 2px;
+  position: relative;
+
+  .flag {
+    position: absolute;
+    top: -6px;
+    right: -9px;
+  }
 }
 
 .match-result-win {
@@ -28,4 +44,15 @@
 
 .match-result-pending {
   background: repeating-linear-gradient(-45deg, #64748b, #64748b 2px, #ffffff 2px, #ffffff 5px);
+}
+
+.match-result2 {
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  background-color: #b9c1cce6;
+  border-radius: 50%;
+  right: -6px;
+  top: -4px;
+  box-shadow: 2px 1px 3px #9ca3af;
 }

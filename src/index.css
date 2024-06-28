@@ -23,11 +23,12 @@ a:hover {
 }
 
 body {
+  font-size: 14px;
   margin: 16px 0;
 }
 
 h1 {
-  font-size: 36px;
+  font-size: 24px;
   line-height: 1.1;
 }
 
@@ -69,7 +70,7 @@ button:focus-visible {
 }
 
 #root {
-  width: 1470px;
+  width: 1616px;
   margin: 0 auto;
 }
 

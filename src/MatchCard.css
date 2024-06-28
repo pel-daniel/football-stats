@@ -8,6 +8,9 @@
   padding: 2px 5px;
 }
 
+.match:hover {
+  background-color: color-mix(in srgb, var(--color-group) 10%, transparent);
+}
 .calendar-team-name {
   width: 10ch;
 }

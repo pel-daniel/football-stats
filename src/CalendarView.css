@@ -1,5 +1,5 @@
 .calendar {
-  width: 1050px;
+  /* width: 1050px; */
 }
 
 .day-of-week {
@@ -18,7 +18,7 @@
 }
 
 .date-cell-today {
-  background: repeating-linear-gradient(-45deg, #64748b21, #64748b21 2px, #ffffff 2px, #ffffff 6px);
+  background: repeating-linear-gradient(-45deg, rgb(100 116 139 / 10%), rgb(100 116 139 / 10%) 2px, #ffffff 2px, #ffffff 6px);
   border-radius: 4px;
 }
 

@@ -8,3 +8,11 @@
   border-radius: 2px;
   box-shadow: 2px 1px 3px #9ca3af;
 }
+
+.flat-sm {
+  height: 18px;
+  width: 18px;
+
+  border-radius: 50%;
+  box-shadow: 2px 1px 1px #9ca3af;
+}
