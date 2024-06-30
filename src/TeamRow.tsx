@@ -20,7 +20,7 @@ export const TeamRow = ({ team }: { team: Team }) => {
 
       <div className="match-result-row">
         { team.matches.map(match => {
-          const date = new Date(`${match.date} ${timezone}`);
+          const date = new Date(`${match.date.replace(/-/g, "/")} ${timezone}`);
           const againstTeam = match.team1.code !== team.code ? match.team1 : match.team2;
 
           return (

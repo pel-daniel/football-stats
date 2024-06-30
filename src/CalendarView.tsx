@@ -24,7 +24,7 @@ export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
 
       <div className="date-grid">
         {Object.entries(matchesByDate).map(([key, matches]) => {
-          const date = new Date(`${key} ${timezone}`);
+          const date = new Date(`${key.replace(/-/g, "/")} ${timezone}`);
 
           return (
             <div
