@@ -32,6 +32,7 @@ export const TeamRow = ({ team }: { team: Team }) => {
                   "match-result-tomorrow": tomorrow.toDateString() === date.toDateString()
                 }
               )}
+              key={againstTeam.code}
             >
               <Flag team={againstTeam} size="sm" key={againstTeam.code} />
             </div>
