@@ -7,14 +7,6 @@ export interface ApiTeam {
   code: string;
 }
 
-// interface Match {
-//   date: string;
-//   time: string;
-//   team1: ApiTeam;
-//   team2: ApiTeam;
-//   score: Record<ApiTeam['code'], number>;
-// }
-
 export interface ApiGroup {
   name: string;
   teams: ApiTeam[];
@@ -27,16 +19,11 @@ interface ApiMatchBase {
   team2: ApiTeam;
 }
 
-// export interface ApiMatch extends ApiMatchBase {
-//   score1: number;
-//   score1i: number;
-//   score2: number;
-//   score2i: number;
-// }
-
 interface ApiScore {
   ht?: [number, number];
   ft?: [number, number];
+  et?: [number, number];
+  p?: [number, number];
 }
 
 export interface ApiMatch extends ApiMatchBase {
@@ -109,17 +96,6 @@ export const getTournament = async (tournamentName: string, year: number, repo: 
               ...scores[apiTeam.code],
               group: apiGroup.name,
               matches: matches.filter(match => match.team1.code === apiTeam.code || match.team2.code === apiTeam.code)
-                  // map(match => (
-                  //   {
-                  //     ...match,
-                  //     score: {
-                  //       [match.team1.code]: match.score1,
-                  //       [match.team2.code]: match.score2,
-                  //       // [match.team1.code]: match.score.ft[0],
-                  //       // [match.team2.code]: match.score.ft[1],
-                  //     }
-                  //   }
-                  // )),
             }
           ))
         }
