@@ -1,11 +1,11 @@
-import { ApiMatch, Group, MatchResult, Team, TeamScores } from "./apiClient";
+import { Match, Group, MatchResult, Team, TeamScores } from "./apiClient";
 
-export const getScores = (matches: ApiMatch[]): TeamScores => {
+export const getScores = (matches: Match[]): TeamScores => {
   const teamScores: TeamScores = {};
 
   matches.forEach(match => {
-    const score1 = match.score1 ?? (match.score?.ft && match.score.ft[0]);
-    const score2 = match.score2 ?? (match.score?.ft && match.score.ft[1]);
+    const score1 = match.score.ft && match.score.ft[0];
+    const score2 = match.score.ft && match.score.ft[1];
 
     if(!(match.team1.code in teamScores)) {
       teamScores[match.team1.code] = {
@@ -67,9 +67,9 @@ export const getScores = (matches: ApiMatch[]): TeamScores => {
   return teamScores;
 };
 
-export const getScore = (match: ApiMatch, team: Team): MatchResult => {
-  const score1 = match.score1 ?? (match.score?.ft && match.score.ft[0]);
-  const score2 = match.score2 ?? (match.score?.ft && match.score.ft[1]);
+export const getScore = (match: Match, team: Team): MatchResult => {
+  const score1 = match.score?.ft && match.score.ft[0];
+  const score2 = match.score?.ft && match.score.ft[1];
   const score = match.team1.code === team.code ? score1 : score2;
   const scoreAgainst = match.team1.code !== team.code ? score1 : score2;
 

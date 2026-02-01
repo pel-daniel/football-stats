@@ -27,8 +27,14 @@ interface ApiScore {
 }
 
 export interface ApiMatch extends ApiMatchBase {
+  score1i?: number;
+  score2i?: number;
   score1?: number;
   score2?: number;
+  score1et?: number;
+  score2et?: number;
+  score1p?: number;
+  score2p?: number;
   score?: ApiScore;
 }
 
@@ -39,8 +45,7 @@ interface ApiRound {
 
 export interface ApiTournamentMatches {
   name: string;
-  rounds?: ApiRound[];
-  matches?: ApiMatch[];
+  rounds: ApiRound[];
 }
 
 interface ApiTournamentGroups {
@@ -60,8 +65,12 @@ interface TeamScore {
 
 export type TeamScores = Record<ApiTeam['code'], TeamScore>;
 
+export interface Match extends ApiMatchBase {
+  score: ApiScore;
+}
+
 export interface Team extends ApiTeam, TeamScore {
-  matches: ApiMatch[];
+  matches: Match[];
   group: string;
 }
 
@@ -73,7 +82,16 @@ export interface Group {
 export interface Tournament {
   name: string;
   groups: Group[];
-  matches: ApiMatch[];
+  matches: Match[];
+}
+
+const getScore = (match: ApiMatch): ApiScore => {
+  const ht: [number, number] | undefined = match.score1i != null && match.score2i != null ? [match.score1i, match.score2i] : match.score?.ht;
+  const ft: [number, number] | undefined = match.score1 != null && match.score2 != null ? [match.score1, match.score2] : match.score?.ft;
+  const et: [number, number] | undefined = match.score1et != null && match.score2et != null ? [match.score1et, match.score2et] : match.score?.et;
+  const p: [number, number] | undefined = match.score1p != null && match.score2p != null ? [match.score1p, match.score2p] : match.score?.p;
+
+  return { ht, ft, et, p };
 }
 
 export const getTournament = async (tournamentName: string, year: number, repo: string): Promise<Tournament | null> => {
@@ -83,8 +101,8 @@ export const getTournament = async (tournamentName: string, year: number, repo: 
   if(tournamentGroupsResponse.ok && tournamentMatchesResponse.ok) {
     const tournamentGroups: ApiTournamentGroups = await tournamentGroupsResponse.json();
     const tournamentMatches: ApiTournamentMatches = await tournamentMatchesResponse.json();
-    let matches = tournamentMatches.rounds ? tournamentMatches.rounds.flatMap(round => round.matches): tournamentMatches.matches;
-    matches = matches || [];
+    const matches: Match[] = tournamentMatches.rounds.flatMap(round => round.matches).
+      map(match => ({ ...match, score: getScore(match) }));
     const scores = getScores(matches);
 
     const tournament = {
@@ -101,7 +119,7 @@ export const getTournament = async (tournamentName: string, year: number, repo: 
               group: apiGroup.name,
               matches: matches.
                 filter(match => match.team1.code === apiTeam.code || match.team2.code === apiTeam.code).
-                map(match => ({ ... match }))
+                map(match => ({ ...match, score: getScore(match) }))
             }
           ))
         }
