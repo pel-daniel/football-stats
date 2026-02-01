@@ -1,8 +1,8 @@
 import classNames from "classnames";
 
-import { ApiMatch, Tournament } from "../apiClient";
+import { ApiMatch, Tournament } from "../utils/apiClient";
 import { MatchCard } from "./MatchCard";
-import { getGroupIndex } from "../tournamentUtils";
+import { getGroupIndex } from "../utils/tournamentUtils";
 
 import './CalendarView.css';
 

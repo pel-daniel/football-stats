@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react'
 
-import { getTournament, Tournament } from './apiClient';
+import { getTournament, Tournament } from './utils/apiClient';
 import { CalendarView } from './components/CalendarView';
 import { GroupCard } from './components/GroupCard';
 

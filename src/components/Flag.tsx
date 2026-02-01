@@ -1,5 +1,5 @@
-import { ApiTeam } from "../apiClient";
-import { iso3ToIso2 } from "../countryUtils";
+import { ApiTeam } from "../utils/apiClient";
+import { iso3ToIso2 } from "../utils/countryUtils";
 
 import "./Flag.css";
 

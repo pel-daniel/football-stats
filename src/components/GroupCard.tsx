@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import { Group } from "../apiClient";
+import { Group } from "../utils/apiClient";
 import { TeamRow } from "./TeamRow";
 
 import './GroupCard.css';

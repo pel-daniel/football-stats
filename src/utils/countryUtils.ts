@@ -1,4 +1,4 @@
-export const iso3ToIso2 = {
+export const iso3ToIso2: Record<string, string> = {
   BGD: "BD",
   BEL: "BE",
   BFA: "BF",

@@ -1,9 +1,9 @@
 import classNames from "classnames";
-import { Team } from "../apiClient"
+import { Team } from "../utils/apiClient"
 import { Flag } from "./Flag";
 
 import './TeamRow.css';
-import { getScore } from "../tournamentUtils";
+import { getScore } from "../utils/tournamentUtils";
 
 export const TeamRow = ({ team }: { team: Team }) => {
   const today = new Date();
