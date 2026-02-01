@@ -7,10 +7,12 @@ import { getGroupIndex } from "../utils/tournamentUtils";
 import './CalendarView.css';
 
 export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
-  const matchesByDate: Record<string, ApiMatch[]> = Object.groupBy(
-    tournament.matches,
-    (match: ApiMatch) => match.date
-  );
+  const matchesByDate = tournament.matches.reduce<Record<string, ApiMatch[]>>((acc, match) => {
+    const key = match.date;
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(match);
+    return acc;
+  }, {});
   const daysOfWeek = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
   const today = new Date();
   const timezone = today.toLocaleDateString(undefined, {day:'2-digit', timeZoneName: 'short' }).substring(4);
