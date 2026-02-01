@@ -18,7 +18,7 @@ export const TeamRow = ({ team }: { team: Team }) => {
       <div className="team-points">{team.points}</div>
 
       <div className="match-result-row">
-        { team.matches.map(match => {
+        { team.matches.map((match, index) => {
           const date = new Date(`${match.date.replace(/-/g, "/")} ${timezone}`);
           const againstTeam = match.team1.code !== team.code ? match.team1 : match.team2;
 
@@ -31,7 +31,7 @@ export const TeamRow = ({ team }: { team: Team }) => {
                   "match-result-tomorrow": tomorrow.toDateString() === date.toDateString()
                 }
               )}
-              key={againstTeam.code}
+              key={`${againstTeam.code}-${index}`}
             >
               <Flag team={againstTeam} size="sm" key={againstTeam.code} />
             </div>

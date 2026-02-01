@@ -5,8 +5,8 @@ import { ApiMatch } from "../utils/apiClient";
 import "./MatchCard.css";
 
 export const MatchCard = ({ match, groupIndex }: { match: ApiMatch, groupIndex?: number }) => {
-  const score1 = match.score.ft && match.score.ft[0];
-  const score2 = match.score.ft && match.score.ft[1];
+  const score1 = match.score1 ?? (match.score?.ft && match.score.ft[0]);
+  const score2 = match.score2 ?? (match.score?.ft && match.score.ft[1]);
 
   return (
     <div className="match" style={{ "--color-group": `var(--color-group-${groupIndex})` } as CSSProperties}>

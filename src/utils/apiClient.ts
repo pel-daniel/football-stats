@@ -27,7 +27,9 @@ interface ApiScore {
 }
 
 export interface ApiMatch extends ApiMatchBase {
-  score: ApiScore;
+  score1?: number;
+  score2?: number;
+  score?: ApiScore;
 }
 
 interface ApiRound {
@@ -37,7 +39,8 @@ interface ApiRound {
 
 export interface ApiTournamentMatches {
   name: string;
-  rounds: ApiRound[];
+  rounds?: ApiRound[];
+  matches?: ApiMatch[];
 }
 
 interface ApiTournamentGroups {
@@ -80,8 +83,9 @@ export const getTournament = async (tournamentName: string, year: number, repo: 
   if(tournamentGroupsResponse.ok && tournamentMatchesResponse.ok) {
     const tournamentGroups: ApiTournamentGroups = await tournamentGroupsResponse.json();
     const tournamentMatches: ApiTournamentMatches = await tournamentMatchesResponse.json();
-    const matches = tournamentMatches.rounds.flatMap(round => round.matches);
-    const scores = getScores(tournamentMatches);
+    let matches = tournamentMatches.rounds ? tournamentMatches.rounds.flatMap(round => round.matches): tournamentMatches.matches;
+    matches = matches || [];
+    const scores = getScores(matches);
 
     const tournament = {
       name: tournamentGroups.name,
@@ -95,7 +99,9 @@ export const getTournament = async (tournamentName: string, year: number, repo: 
               code: apiTeam.code,
               ...scores[apiTeam.code],
               group: apiGroup.name,
-              matches: matches.filter(match => match.team1.code === apiTeam.code || match.team2.code === apiTeam.code)
+              matches: matches.
+                filter(match => match.team1.code === apiTeam.code || match.team2.code === apiTeam.code).
+                map(match => ({ ... match }))
             }
           ))
         }

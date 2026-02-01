@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router';
 
 import { getTournament, Tournament } from '../utils/apiClient';
 import { CalendarView } from '../components/CalendarView';
@@ -9,19 +10,21 @@ import styles from './TournamentPage.module.css';
 
 export const TournamentPage = () => {
   const [tournament, setTournament] = useState<Tournament | null>(null);
+  const { name, year } = useParams();
+
   const query = new URLSearchParams(window.location.search);
-  const tournamentName = query.get("tournament") || "euro";
-  const year = parseInt(query.get('year') || new Date().getFullYear().toString());
-  const repo = query.get("repo") || tournamentName;
   const compact = query.get("compact") == "true";
 
   useEffect(() => {
-    const fetchData = async () => {
-      const tournament = await getTournament(tournamentName, year, repo);
+    const fetchData = async (name: string, year: number) => {
+      const tournament = await getTournament(name, year, name);
       setTournament(tournament);
     };
 
-    fetchData();
+
+    if (name != null && year != null) {
+      fetchData(name, parseInt(year));
+    }
   }, []);
 
   return (
@@ -30,8 +33,8 @@ export const TournamentPage = () => {
         <div>
           <div className="flex mb-12">
             <img
-              src={`../tournamentLogos/${repo}.webp`}
-              alt={`${tournamentName} logo`}
+              src={`/tournamentLogos/${name}.webp`}
+              alt={`${name} logo`}
               className={styles['logo']}
             />
             <h1>{tournament.name}</h1>

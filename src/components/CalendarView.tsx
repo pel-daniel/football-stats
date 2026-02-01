@@ -7,7 +7,6 @@ import { getGroupIndex } from "../utils/tournamentUtils";
 import './CalendarView.css';
 
 export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
-  // @ts-ignore:next-line
   const matchesByDate: Record<string, ApiMatch[]> = Object.groupBy(
     tournament.matches,
     (match: ApiMatch) => match.date
