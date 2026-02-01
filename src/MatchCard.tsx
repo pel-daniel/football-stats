@@ -5,8 +5,6 @@ import { ApiMatch } from "./apiClient";
 import "./MatchCard.css";
 
 export const MatchCard = ({ match, groupIndex }: { match: ApiMatch, groupIndex?: number }) => {
-  // const score1 = match.score1;
-  // const score2 = match.score2;
   const score1 = match.score.ft && match.score.ft[0];
   const score2 = match.score.ft && match.score.ft[1];
 

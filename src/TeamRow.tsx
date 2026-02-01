@@ -16,7 +16,6 @@ export const TeamRow = ({ team }: { team: Team }) => {
       <Flag team={team} />
       <div className="team-name">{team.name}</div>
       <div className="team-points">{team.points}</div>
-      {/* <div className="team-difference">({team.difference})</div> */}
 
       <div className="match-result-row">
         { team.matches.map(match => {
