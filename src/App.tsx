@@ -1,10 +1,11 @@
+import classNames from 'classnames';
 import { useEffect, useState } from 'react'
+
 import { getTournament, Tournament } from './apiClient';
-import { CalendarView } from './CalendarView';
-import { GroupCard } from './GroupCard';
+import { CalendarView } from './components/CalendarView';
+import { GroupCard } from './components/GroupCard';
 
 import './App.css'
-import classNames from 'classnames';
 
 export const App = () => {
   const [tournament, setTournament] = useState<Tournament | null>(null);

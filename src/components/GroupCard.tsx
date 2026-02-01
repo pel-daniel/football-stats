@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
-import { TeamRow } from "./TeamRow"
-import { Group } from "./apiClient"
+import { Group } from "../apiClient";
+import { TeamRow } from "./TeamRow";
 
 import './GroupCard.css';
 

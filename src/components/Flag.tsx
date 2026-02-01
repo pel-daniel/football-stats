@@ -1,13 +1,12 @@
-import { ApiTeam } from "./apiClient";
-import { iso3ToIso2 } from "./countryUtils";
+import { ApiTeam } from "../apiClient";
+import { iso3ToIso2 } from "../countryUtils";
 
 import "./Flag.css";
-import './TeamRow.css';
 
 type FlagSize = "sm" | "lg";
 
 export const Flag = ({ team, size }: { team: ApiTeam, size?: FlagSize }) => {
-  const iso2 = iso3ToIso2[team.code as keyof typeof iso3ToIso2]?.toLowerCase();
+  const iso2 = iso3ToIso2[team.code]?.toLowerCase();
 
   return (
     <div

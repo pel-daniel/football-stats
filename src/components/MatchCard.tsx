@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 import { Flag } from "./Flag";
-import { ApiMatch } from "./apiClient";
+import { ApiMatch } from "../apiClient";
 
 import "./MatchCard.css";
 
