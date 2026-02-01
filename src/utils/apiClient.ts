@@ -103,7 +103,7 @@ export const getTournament = async (tournamentName: string, year: number, repo: 
     const tournamentMatches: ApiTournamentMatches = await tournamentMatchesResponse.json();
     const matches: Match[] = tournamentMatches.rounds.flatMap(round => round.matches).
       map(match => ({ ...match, score: getScore(match) }));
-    const scores = getScores(matches);
+    const scores = getScores(tournamentMatches);
 
     const tournament = {
       name: tournamentGroups.name,
