@@ -264,4 +264,5 @@ export const iso3ToIso2: Record<string, string> = {
   CRC: "CR",
   KSA: "SA",
   GRE: "GR",
+  ALG: "DZ",
 };
