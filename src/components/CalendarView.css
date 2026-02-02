@@ -9,7 +9,7 @@
 
 .date-grid {
   display: grid;
-  grid-template-columns: repeat(7, 150px);
+  grid-template-columns: repeat(7, minmax(max-content, 1fr));
 }
 
 .date-cell {

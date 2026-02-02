@@ -19,11 +19,9 @@ export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
 
   return (
     <div className="calendar">
-      <div className="day-of-week">
-        {daysOfWeek.map((day, index) => <div key={index}>{day}</div>)}
-      </div>
-
       <div className="date-grid">
+        {daysOfWeek.map((day, index) => <div key={index}>{day}</div>)}
+
         {Object.entries(matchesByDate).map(([key, matches]) => {
           const date = new Date(`${key.replace(/-/g, "/")} ${timezone}`);
 
