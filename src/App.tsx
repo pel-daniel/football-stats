@@ -2,8 +2,6 @@ import { Route, Routes } from 'react-router';
 import { TournamentPage } from './pages/TournamentPage'
 import { TournamentSelectPage } from './pages/TournamentSelectPage';
 
-import './App.css'
-
 export const App = () => {
   return (
     <Routes>
