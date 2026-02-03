@@ -1,13 +1,13 @@
 import classNames from "classnames";
 
-import { ApiMatch, Tournament } from "../utils/apiClient";
+import { Match, Tournament } from "../utils/apiClient";
 import { MatchCard } from "./MatchCard";
 import { getGroupIndex } from "../utils/tournamentUtils";
 
 import './CalendarView.css';
 
 export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
-  const matchesByDate = tournament.matches.reduce<Record<string, ApiMatch[]>>((acc, match) => {
+  const matchesByDate = tournament.matches.reduce<Record<string, Match[]>>((acc, match) => {
     const key = match.date;
     if (!acc[key]) acc[key] = [];
     acc[key].push(match);
