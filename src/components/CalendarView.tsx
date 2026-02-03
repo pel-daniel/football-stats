@@ -18,34 +18,34 @@ export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
   const timezone = today.toLocaleDateString(undefined, {day:'2-digit', timeZoneName: 'short' }).substring(4);
 
   return (
-    <div className="calendar">
-      <div className="date-grid">
-        {daysOfWeek.map((day, index) => <div key={index}>{day}</div>)}
+    <div className="calendar-grid">
+      {daysOfWeek.map((day, index) =>
+        <div key={index} className="cell">{day}</div>
+      )}
 
-        {Object.entries(matchesByDate).map(([key, matches]) => {
-          const date = new Date(`${key.replace(/-/g, "/")} ${timezone}`);
+      {Object.entries(matchesByDate).map(([key, matches]) => {
+        const date = new Date(`${key.replace(/-/g, "/")} ${timezone}`);
 
-          return (
-            <div
-              className={classNames("date-cell", { "date-cell-today": today.toDateString() === date.toDateString() })}
-              style={{ gridColumn: ((date.getDay()) % 7) + 1 }}
-              key={key}
-            >
-              <div className="date-cell-day">{date.getDate()}</div>
+        return (
+          <div
+            className={classNames("cell", { "cell-today": today.toDateString() === date.toDateString() })}
+            style={{ gridColumn: ((date.getDay()) % 7) + 1 }}
+            key={key}
+          >
+            <div className="cell-day">{date.getDate()}</div>
 
-              <div className="flex-column">
-                {matches.map((match, index) =>
-                  <MatchCard
-                    match={match}
-                    groupIndex={getGroupIndex(match.team1.code, tournament.groups)}
-                    key={index}
-                  />
-                )}
-              </div>
+            <div className="flex-column">
+              {matches.map((match, index) =>
+                <MatchCard
+                  match={match}
+                  groupIndex={getGroupIndex(match.team1.code, tournament.groups)}
+                  key={index}
+                />
+              )}
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
