@@ -18,7 +18,7 @@ export const MatchCard = ({ match, groupIndex }: { match: Match, groupIndex: num
         <div className="calendar-team-name">{match.team1.name}</div>
         <div>
           {fullTimeScore1}
-          {score1 && ` (${score1})`}
+          {score1 !== undefined && ` (${score1})`}
         </div>
       </div>
 
@@ -27,7 +27,7 @@ export const MatchCard = ({ match, groupIndex }: { match: Match, groupIndex: num
         <div className="calendar-team-name">{match.team2.name}</div>
         <div>
           {fullTimeScore2}
-          {score2 && ` (${score2})`}
+          {score2 !== undefined && ` (${score2})`}
         </div>
       </div>
     </div>
