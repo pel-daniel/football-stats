@@ -69,7 +69,7 @@ export const getScores = (tournamentMatches: ApiTournamentMatches): TeamScores =
   return teamScores;
 };
 
-export const getScore = (match: Match, team: Team): MatchResult => {
+export const getMatchResult = (match: Match, team: Team): MatchResult => {
   const score1 = match.score?.ft && match.score.ft[0];
   const score2 = match.score?.ft && match.score.ft[1];
   const score = match.team1.code === team.code ? score1 : score2;

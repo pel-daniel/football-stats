@@ -3,7 +3,7 @@ import { Team } from "../utils/apiClient"
 import { Flag } from "./Flag";
 
 import './TeamRow.css';
-import { getScore } from "../utils/tournamentUtils";
+import { getMatchResult } from "../utils/tournamentUtils";
 
 export const TeamRow = ({ team }: { team: Team }) => {
   const today = new Date();
@@ -25,7 +25,7 @@ export const TeamRow = ({ team }: { team: Team }) => {
           return (
             <div
               className={classNames(
-                `match-result match-result-${getScore(match, team)}`,
+                `match-result match-result-${getMatchResult(match, team)}`,
                 {
                   "match-result-today": today.toDateString() === date.toDateString(),
                   "match-result-tomorrow": tomorrow.toDateString() === date.toDateString()
