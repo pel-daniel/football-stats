@@ -70,8 +70,12 @@ export const getScores = (tournamentMatches: ApiTournamentMatches): TeamScores =
 };
 
 export const getMatchResult = (match: Match, team: Team): MatchResult => {
-  const score1 = match.score?.ft && match.score.ft[0];
-  const score2 = match.score?.ft && match.score.ft[1];
+  const [fullTimeScore1, fullTimeScore2] = match.score.ft || [undefined, undefined];
+  const [extraTimeScore1, extraTimeScore2] = match.score.et || [undefined, undefined];
+  const [penaltiesScore1, penaltiesScore2] = match.score.p || [undefined, undefined];
+  const score1 = penaltiesScore1 || extraTimeScore1 || fullTimeScore1;
+  const score2 = penaltiesScore2 || extraTimeScore2 || fullTimeScore2;
+
   const score = match.team1.code === team.code ? score1 : score2;
   const scoreAgainst = match.team1.code !== team.code ? score1 : score2;
 
