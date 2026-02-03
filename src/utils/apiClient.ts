@@ -60,7 +60,6 @@ interface TeamScore {
   for: number;
   against: number;
   difference: number;
-  matchResults: MatchResult[];
 }
 
 export type TeamScores = Record<ApiTeam['code'], TeamScore>;

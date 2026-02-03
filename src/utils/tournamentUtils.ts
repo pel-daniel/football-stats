@@ -14,7 +14,6 @@ export const getScores = (tournamentMatches: ApiTournamentMatches): TeamScores =
           for: 0,
           against: 0,
           difference: 0,
-          matchResults: [],
         }
       }
 
@@ -24,32 +23,21 @@ export const getScores = (tournamentMatches: ApiTournamentMatches): TeamScores =
           for: 0,
           against: 0,
           difference: 0,
-          matchResults: [],
         }
       }
 
       let pointsTeam1 = 0;
       let pointsTeam2 = 0;
 
-      if(score1 === undefined || score2 === undefined) {
-        teamScores[match.team1.code].matchResults.push('pending');
-        teamScores[match.team2.code].matchResults.push('pending');
-      } else if(score1 > score2) {
-        pointsTeam1 = 3;
-        teamScores[match.team1.code].matchResults.push('win');
-
-        teamScores[match.team2.code].matchResults.push('lose');
-      } else if(score2 > score1) {
-        teamScores[match.team1.code].matchResults.push('lose');
-
-        pointsTeam2 = 3;
-        teamScores[match.team2.code].matchResults.push('win');
-      } else {
-        pointsTeam1 = 1;
-        teamScores[match.team1.code].matchResults.push('draw');
-
-        pointsTeam2 = 1;
-        teamScores[match.team2.code].matchResults.push('draw');
+      if(score1 !== undefined && score2 !== undefined) {
+        if(score1 > score2) {
+          pointsTeam1 = 3;
+        } else if(score2 > score1) {
+          pointsTeam2 = 3;
+        } else {
+          pointsTeam1 = 1;
+          pointsTeam2 = 1;
+        }
       }
 
       if(score1 !== undefined && score2 !== undefined && round.name.startsWith("Matchday")) {
