@@ -70,14 +70,3 @@
 .match-result-tomorrow {
   border: 2px solid rgba(0, 0, 255, 0.832);
 }
-
-.match-result2 {
-  position: absolute;
-  height: 12px;
-  width: 12px;
-  background-color: #b9c1cce6;
-  border-radius: 50%;
-  right: -6px;
-  top: -4px;
-  box-shadow: 2px 1px 3px #9ca3af;
-}
