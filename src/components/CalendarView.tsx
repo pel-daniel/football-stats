@@ -4,7 +4,7 @@ import { Match, Tournament } from "../utils/apiClient";
 import { MatchCard } from "./MatchCard";
 import { getGroupIndex } from "../utils/tournamentUtils";
 
-import './CalendarView.css';
+import styles from './CalendarView.module.css';
 
 export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
   const matchesByDate = tournament.matches.reduce<Record<string, Match[]>>((acc, match) => {
@@ -18,9 +18,11 @@ export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
   const timezone = today.toLocaleDateString(undefined, {day:'2-digit', timeZoneName: 'short' }).substring(4);
 
   return (
-    <div className="calendar-grid">
+    <div className={styles["calendar-grid"]}>
       {daysOfWeek.map((day, index) =>
-        <div key={index} className="cell">{day}</div>
+        <div key={index} className={styles["cell"]}>
+          {day}
+        </div>
       )}
 
       {Object.entries(matchesByDate).map(([key, matches]) => {
@@ -28,11 +30,16 @@ export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
 
         return (
           <div
-            className={classNames("cell", { "cell-today": today.toDateString() === date.toDateString() })}
+            className={classNames(
+              styles["cell"],
+              { [styles["cell-today"]]: today.toDateString() === date.toDateString() }
+            )}
             style={{ gridColumn: ((date.getDay()) % 7) + 1 }}
             key={key}
           >
-            <div className="cell-day">{date.getDate()}</div>
+            <div className={styles["cell-day"]}>
+              {date.getDate()}
+            </div>
 
             <div className="flex-column">
               {matches.map((match, index) =>
