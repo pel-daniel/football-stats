@@ -2,8 +2,10 @@
   width: 15ch;
 }
 
-.compact .team-name {
-  display: none;
+:global(.compact) {
+  .team-name {
+    display: none;
+  }
 }
 
 .team-points {
