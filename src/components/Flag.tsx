@@ -1,7 +1,8 @@
+import classNames from "classnames";
 import { ApiTeam } from "../utils/apiClient";
 import { iso3ToIso2 } from "../utils/countryUtils";
 
-import "./Flag.css";
+import styles from "./Flag.module.css";
 
 type FlagSize = "sm" | "lg";
 
@@ -10,7 +11,7 @@ export const Flag = ({ team, size }: { team: ApiTeam, size?: FlagSize }) => {
 
   return (
     <div
-      className={`flag flag-${size}`}
+      className={classNames(styles["flag"], styles[`flag-${size}`])}
       style={{ backgroundImage: `url(https://flagpedia.net/data/flags/h80/${iso2}.webp)`}}
     >
     </div>

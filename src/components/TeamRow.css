@@ -18,7 +18,7 @@
 .match-row:hover {
   background-color: color-mix(in srgb, var(--color-group) 10%, transparent);
 
-  .flag {
+  .match-flag {
     opacity: 1;
   }
 }
@@ -36,7 +36,7 @@
   position: relative;
   border-radius: 2px;
 
-  .flag {
+  .match-flag {
     position: absolute;
     top: -6px;
     right: -9px;

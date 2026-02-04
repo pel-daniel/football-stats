@@ -33,7 +33,9 @@ export const TeamRow = ({ team }: { team: Team }) => {
               )}
               key={`${againstTeam.code}-${index}`}
             >
-              <Flag team={againstTeam} size="sm" key={againstTeam.code} />
+              <div className="match-flag">
+                <Flag team={againstTeam} size="sm" key={againstTeam.code} />
+              </div>
             </div>
           );
         })}
