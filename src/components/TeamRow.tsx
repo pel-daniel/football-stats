@@ -10,7 +10,9 @@ export const TeamRow = ({ team }: { team: Team }) => {
   const today = new Date();
   const tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1);
-  const timezone = today.toLocaleDateString(undefined, {day:'2-digit', timeZoneName: 'short' }).substring(4);
+  const timezone = today.toLocaleDateString(
+    undefined, {day:'2-digit', timeZoneName: 'short' }
+  ).substring(4);
 
   return (
     <div className={classNames("flex", styles["match-row"])}>
