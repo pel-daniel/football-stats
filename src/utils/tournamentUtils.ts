@@ -1,4 +1,4 @@
-import { Match, Group, MatchResult, Team, TeamScores, ApiTournamentMatches } from "./apiClient";
+import { Match, Group, MatchResult, TeamScores, ApiTournamentMatches, ApiTeam } from "./apiClient";
 
 export const getScores = (tournamentMatches: ApiTournamentMatches): TeamScores => {
   const teamScores: TeamScores = {};
@@ -57,7 +57,7 @@ export const getScores = (tournamentMatches: ApiTournamentMatches): TeamScores =
   return teamScores;
 };
 
-export const getMatchResult = (match: Match, team: Team): MatchResult => {
+export const getMatchResult = (match: Match, team: ApiTeam): MatchResult => {
   const [fullTimeScore1, fullTimeScore2] = match.score.ft || [undefined, undefined];
   const [extraTimeScore1, extraTimeScore2] = match.score.et || [undefined, undefined];
   const [penaltiesScore1, penaltiesScore2] = match.score.p || [undefined, undefined];
