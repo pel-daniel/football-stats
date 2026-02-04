@@ -10,7 +10,7 @@ export const Flag = ({ team, size }: { team: ApiTeam, size?: FlagSize }) => {
 
   return (
     <div
-      className={`flag flat-${size}`}
+      className={`flag flag-${size}`}
       style={{ backgroundImage: `url(https://flagpedia.net/data/flags/h80/${iso2}.webp)`}}
     >
     </div>

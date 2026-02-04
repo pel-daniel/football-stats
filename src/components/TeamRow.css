@@ -11,19 +11,21 @@
   text-align: right;
 }
 
+.match-row {
+  padding-block: 4px;
+}
+
 .match-row:hover {
   background-color: color-mix(in srgb, var(--color-group) 10%, transparent);
+
+  .flag {
+    opacity: 1;
+  }
 }
 
 .match-result-row {
   display: flex;
-  gap: 16px;
-}
-
-.match-row:hover {
-  .flag {
-    opacity: 1;
-  }
+  gap: 8px;
 }
 
 .match-result {
@@ -38,6 +40,7 @@
     position: absolute;
     top: -6px;
     right: -9px;
+    z-index: 1;
 
     opacity: 0;
     transition: opacity 300ms;
