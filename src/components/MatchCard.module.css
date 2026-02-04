@@ -12,10 +12,10 @@
   background-color: color-mix(in srgb, var(--color-group) 10%, transparent);
 }
 
-.calendar-team-name {
+.team-name {
   width: 10ch;
 }
 
-.compact .calendar-team-name {
+.compact .team-name {
   display: none;
 }
