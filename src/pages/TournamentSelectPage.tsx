@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 
+import styles from "./TournamentSelectPage.module.css";
+
 const tournaments = [
   // {
   //   name: "Euro",
@@ -16,7 +18,16 @@ export const TournamentSelectPage = () => {
     <div>
       {tournaments.map(tournament =>
         <div key={tournament.name}>
-          <h2>{tournament.name}</h2>
+          <div>
+            <div className="flex mb-12">
+              <img
+                src={`/tournamentLogos/${tournament.name.toLowerCase()}.webp`}
+                alt={`${tournament.name} logo`}
+                className={styles['logo']}
+              />
+              <h1>{tournament.name}</h1>
+            </div>
+          </div>
 
           <ul>
             {tournament.years.map(year =>
