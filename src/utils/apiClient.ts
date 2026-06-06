@@ -1,3 +1,4 @@
+import { countryToIso2 } from "./countryUtils";
 import { getMatchResult, getScores } from "./tournamentUtils";
 
 const baseUrl = 'https://raw.githubusercontent.com/openfootball';
@@ -9,14 +10,14 @@ export interface ApiTeam {
 
 export interface ApiGroup {
   name: string;
-  teams: ApiTeam[];
+  teams: string[];
 }
 
 interface ApiMatchBase {
   date: string;
   time: string;
-  team1: ApiTeam;
-  team2: ApiTeam;
+  team1: string;
+  team2: string;
 }
 
 interface ApiScore {
@@ -27,6 +28,9 @@ interface ApiScore {
 }
 
 export interface ApiMatch extends ApiMatchBase {
+  round: string;
+  group: string;
+  ground: string;
   score1i?: number;
   score2i?: number;
   score1?: number;
@@ -38,14 +42,9 @@ export interface ApiMatch extends ApiMatchBase {
   score?: ApiScore;
 }
 
-interface ApiRound {
-  name: string;
-  matches: ApiMatch[];
-}
-
 export interface ApiTournamentMatches {
   name: string;
-  rounds: ApiRound[];
+  matches: ApiMatch[];
 }
 
 interface ApiTournamentGroups {
@@ -64,11 +63,17 @@ interface TeamScore {
 
 export type TeamScores = Record<ApiTeam['code'], TeamScore>;
 
-export interface Match extends ApiMatchBase {
+export interface Match {
+  date: string;
+  time: string;
+  team1: ApiTeam;
+  team2: ApiTeam;
   score: ApiScore;
 }
 
-export interface Team extends ApiTeam, TeamScore {
+export interface Team extends TeamScore {
+  name: string;
+  code: string;
   matches: Match[];
   group: string;
 }
@@ -104,13 +109,15 @@ const getScore = (match: ApiMatch): ApiScore => {
 const convertApiMatchToMatch = (match: ApiMatch): Match => {
   return {
     ...match,
+    team1: { name: match.team1, code: countryToIso2[match.team1] },
+    team2: { name: match.team2, code: countryToIso2[match.team2] },
     score: getScore(match)
   };
 }
 
 const getWinners = (tournamentMatches: ApiTournamentMatches): Winners => {
-  const final = tournamentMatches.rounds.find(round => round.name === "Final");
-  const thirdPlaceMatch = tournamentMatches.rounds.find(round => round.name === "Match for third place");
+  const final = tournamentMatches.matches.find(match => match.round === "Final");
+  const thirdPlaceMatch = tournamentMatches.matches.find(match => match.round === "Match for third place");
 
   let firstPlace: ApiTeam | undefined;
   let secondPlace: ApiTeam | undefined;
@@ -118,32 +125,32 @@ const getWinners = (tournamentMatches: ApiTournamentMatches): Winners => {
   let fourthPlace: ApiTeam | undefined;
 
   if (final) {
-    const team1FinalResult = final.matches && getMatchResult(
-      convertApiMatchToMatch(final.matches[0]),
-      final.matches[0].team1
+    const team1FinalResult = final && getMatchResult(
+      convertApiMatchToMatch(final),
+      final.team1,
     );
 
     if (team1FinalResult === "win") {
-      firstPlace = final.matches[0].team1;
-      secondPlace = final.matches[0].team2;
+      firstPlace = { name: final.team1, code: countryToIso2[final.team1] };
+      secondPlace = { name: final.team2, code: countryToIso2[final.team2] };
     } else if (team1FinalResult === "lose") {
-      firstPlace = final.matches[0].team2;
-      secondPlace = final.matches[0].team1;
+      firstPlace = { name: final.team2, code: countryToIso2[final.team2] };
+      secondPlace = { name: final.team1, code: countryToIso2[final.team1] };
     }
   }
 
   if (thirdPlaceMatch) {
-    const team1ThirdPlaceResult = thirdPlaceMatch.matches && getMatchResult(
-      convertApiMatchToMatch(thirdPlaceMatch.matches[0]),
-      thirdPlaceMatch.matches[0].team1
+    const team1ThirdPlaceResult = thirdPlaceMatch && getMatchResult(
+      convertApiMatchToMatch(thirdPlaceMatch),
+      thirdPlaceMatch.team1
     );
 
     if (team1ThirdPlaceResult === "win") {
-      thirdPlace = thirdPlaceMatch.matches[0].team1;
-      fourthPlace = thirdPlaceMatch.matches[0].team2;
+      thirdPlace = { name: thirdPlaceMatch.team1, code: countryToIso2[thirdPlaceMatch.team1] };
+      fourthPlace = { name: thirdPlaceMatch.team2, code: countryToIso2[thirdPlaceMatch.team2] };
     } else if (team1ThirdPlaceResult === "lose") {
-      thirdPlace = thirdPlaceMatch.matches[0].team2;
-      fourthPlace = thirdPlaceMatch.matches[0].team1;
+      thirdPlace = { name: thirdPlaceMatch.team2, code: countryToIso2[thirdPlaceMatch.team2] };
+      fourthPlace = { name: thirdPlaceMatch.team1, code: countryToIso2[thirdPlaceMatch.team1] };
     }
   }
 
@@ -157,8 +164,7 @@ export const getTournament = async (tournamentName: string, year: number, repo: 
   if (tournamentGroupsResponse.ok && tournamentMatchesResponse.ok) {
     const tournamentGroups: ApiTournamentGroups = await tournamentGroupsResponse.json();
     const tournamentMatches: ApiTournamentMatches = await tournamentMatchesResponse.json();
-    const matches: Match[] = tournamentMatches.rounds.flatMap(round => round.matches).
-      map(convertApiMatchToMatch);
+    const matches: Match[] = tournamentMatches.matches.map(convertApiMatchToMatch);
     const scores = getScores(tournamentMatches);
 
     const tournament = {
@@ -170,13 +176,11 @@ export const getTournament = async (tournamentName: string, year: number, repo: 
           name: apiGroup.name,
           teams: apiGroup.teams.map(apiTeam => (
             {
-              name: apiTeam.name,
-              code: apiTeam.code,
-              ...scores[apiTeam.code],
+              name: apiTeam,
+              code: countryToIso2[apiTeam],
+              ...scores[apiTeam],
               group: apiGroup.name,
-              matches: matches.
-                filter(match => match.team1.code === apiTeam.code || match.team2.code === apiTeam.code).
-                map(convertApiMatchToMatch)
+              matches: matches.filter(match => match.team1.name === apiTeam || match.team2.name === apiTeam)
             }
           ))
         }

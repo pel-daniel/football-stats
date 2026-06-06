@@ -29,7 +29,7 @@ export const TeamRow = ({ team }: { team: Team }) => {
             <div
               className={classNames(
                 styles["match-result"],
-                styles[`match-result-${getMatchResult(match, team)}`],
+                styles[`match-result-${getMatchResult(match, team.code)}`],
                 {
                   [styles["match-result-today"]]: today.toDateString() === date.toDateString(),
                   [styles["match-result-tomorrow"]]: tomorrow.toDateString() === date.toDateString()

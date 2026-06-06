@@ -7,7 +7,7 @@ import { getGroupIndex } from "../utils/tournamentUtils";
 import styles from './CalendarView.module.css';
 
 export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
-  const matchesByDate = tournament.matches.reduce<Record<string, Match[]>>((acc, match) => {
+  const matchesByDate = tournament.matches.reduce((acc: Record<string, Match[]>, match) => {
     const key = match.date;
     if (!acc[key]) acc[key] = [];
     acc[key].push(match);

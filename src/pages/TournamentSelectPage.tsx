@@ -7,7 +7,7 @@ const tournaments = [
   },
   {
     name: "Worldcup",
-    years: [2014, 2018]
+    years: [2014, 2018, 2022, 2026]
   }
 ];
 
