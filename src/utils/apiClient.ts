@@ -10,7 +10,7 @@ export interface ApiTeam {
 
 export interface ApiGroup {
   name: string;
-  teams: string[];
+  teams: string[] | ApiTeam[];
 }
 
 interface ApiMatchBase {
@@ -174,15 +174,17 @@ export const getTournament = async (tournamentName: string, year: number, repo: 
       groups: tournamentGroups.groups.map(apiGroup => (
         {
           name: apiGroup.name,
-          teams: apiGroup.teams.map(apiTeam => (
-            {
-              name: apiTeam,
-              code: countryToIso2[apiTeam],
-              ...scores[apiTeam],
+          teams: apiGroup.teams.map(apiTeam => {
+            const teamName = typeof apiTeam === "string" ? apiTeam : apiTeam.name;
+
+            return {
+              name: teamName,
+              code: countryToIso2[teamName],
+              ...scores[teamName],
               group: apiGroup.name,
-              matches: matches.filter(match => match.team1.name === apiTeam || match.team2.name === apiTeam)
+              matches: matches.filter(match => match.team1.name === teamName || match.team2.name === teamName)
             }
-          ))
+          })
         }
       )),
     };

@@ -48,6 +48,7 @@ export const TournamentPage = () => {
                 <Link
                   to={{ search: `?view=${view}` }}
                   className={classNames('radio-button', { active: view == activeView }) }
+                  key={view}
                 >
                   <img
                     src={`/icons/${view}.svg`}

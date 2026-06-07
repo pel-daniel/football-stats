@@ -3,10 +3,10 @@ import { Link } from "react-router";
 import styles from "./TournamentSelectPage.module.css";
 
 const tournaments = [
-  // {
-  //   name: "Euro",
-  //   years: [2020, 2024]
-  // },
+  {
+    name: "Euro",
+    years: [2020, 2024]
+  },
   {
     name: "Worldcup",
     years: [2014, 2018, 2022, 2026]
