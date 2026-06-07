@@ -59,7 +59,9 @@ export const TeamRow = ({ team }: { team: Team }) => {
       </div>
 
       <div className={classNames(styles["match-details"], { [styles["match-details-collapsed"]]: !isOpen })}>
-        { team.matches.map(match => <MatchCard match={match} groupIndex={0} direction="horizontal" />) }
+        { team.matches.map((match, index) =>
+          <MatchCard match={match} groupIndex={0} direction="horizontal" key={index} />
+        )}
       </div>
     </div>
   )
