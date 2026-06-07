@@ -65,6 +65,29 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.radio-group {
+  background-color: color-mix(in oklab, oklch(13% .028 261.692) 5%,transparent);
+  border-radius: 8px;
+  height: 100%;
+  padding: 8px;
+}
+
+.radio-button {
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  padding: 2px;
+
+  &:hover {
+    background-color: color-mix(in oklab, oklch(13% .028 261.692) 10%, transparent);
+  }
+
+  &.active {
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.999994 0.0000455678 0.0000200868 / 0.1) 0px 0px 0px 1px inset;
+  }
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -92,6 +115,11 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
 }
 
 .mb-12 {
