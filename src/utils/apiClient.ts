@@ -176,11 +176,12 @@ export const getTournament = async (tournamentName: string, year: number, repo: 
           name: apiGroup.name,
           teams: apiGroup.teams.map(apiTeam => {
             const teamName = typeof apiTeam === "string" ? apiTeam : apiTeam.name;
+            const teamCode = countryToIso2[teamName];
 
             return {
               name: teamName,
-              code: countryToIso2[teamName],
-              ...scores[teamName],
+              code: teamCode,
+              ...scores[teamCode],
               group: apiGroup.name,
               matches: matches.filter(match => match.team1.name === teamName || match.team2.name === teamName)
             }
