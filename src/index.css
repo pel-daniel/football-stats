@@ -46,6 +46,10 @@ h1, h2, h3, h4, h5 {
   margin-block-end: 0.2em;
 }
 
+p {
+  margin: 0;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -107,6 +111,12 @@ button:focus-visible {
 
 .flex {
   display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.inline-flex {
+  display: inline-flex;
   align-items: center;
   gap: 4px;
 }
