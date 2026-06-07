@@ -25,7 +25,7 @@ export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
         </div>
       )}
 
-      {Object.entries(matchesByDate).map(([key, matches]) => {
+      {Object.entries(matchesByDate).sort().map(([key, matches]) => {
         const date = new Date(`${key.replace(/-/g, "/")} ${timezone}`);
 
         return (
