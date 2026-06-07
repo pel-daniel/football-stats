@@ -46,6 +46,7 @@ export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
                 <MatchCard
                   match={match}
                   groupIndex={getGroupIndex(match.team1.code, tournament.groups)}
+                  direction="vertical"
                   key={index}
                 />
               )}

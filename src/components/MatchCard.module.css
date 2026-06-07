@@ -12,6 +12,14 @@
   background-color: color-mix(in srgb, var(--color-group) 10%, transparent);
 }
 
+.match-horizontal {
+  flex-direction: row;
+
+  .team2 {
+    flex-direction: row-reverse;
+  }
+}
+
 .team-name {
   width: 10ch;
 }
