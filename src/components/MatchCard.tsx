@@ -35,13 +35,13 @@ export const MatchCard = (
         </div>
       </div>
 
-      <div className={classNames("flex", styles["team2"])}>
-        <div className="flex">
-          <Flag team={match.team2} />
+      <div className={styles["divider"]}>—</div>
 
-          <div className={styles["team-name"]}>
-            {match.team2.name}
-          </div>
+      <div className={classNames("flex", styles["team2"])}>
+        <Flag team={match.team2} />
+
+        <div className={styles["team-name"]}>
+          {match.team2.name}
         </div>
 
         <div>

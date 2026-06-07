@@ -20,9 +20,18 @@
 .match-row:hover {
   background-color: color-mix(in srgb, var(--color-group) 10%, transparent);
 
-  .match-flag {
+  /* .match-flag {
     opacity: 1;
-  }
+  } */
+}
+
+.match-row > .arrow {
+  transition: 300ms;
+}
+
+.match-row.open > .arrow {
+  transform: rotate(90deg);
+  transform-origin: 50% 50% 0;
 }
 
 .match-result-row {
@@ -71,4 +80,12 @@
 
 .match-result-tomorrow {
   border: 2px solid rgba(0, 0, 255, 0.832);
+}
+
+.match-details {
+  padding-inline-start: 22px;
+}
+
+.match-details-collapsed {
+  display: none;
 }

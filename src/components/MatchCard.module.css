@@ -12,11 +12,25 @@
   background-color: color-mix(in srgb, var(--color-group) 10%, transparent);
 }
 
+.match {
+  .divider {
+    display: none;
+  }
+}
+
 .match-horizontal {
   flex-direction: row;
 
+  .divider {
+    display: block;
+  }
+
   .team2 {
     flex-direction: row-reverse;
+
+    .team-name {
+      text-align: right;
+    }
   }
 }
 
