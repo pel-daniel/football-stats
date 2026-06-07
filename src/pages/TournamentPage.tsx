@@ -13,7 +13,7 @@ type View = "groups" | "calendar";
 export const TournamentPage = () => {
   const [tournament, setTournament] = useState<Tournament | null>(null);
   const { name, year } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const compact = searchParams.get("compact") == "true";
   const activeView = searchParams.get("view") || "groups" as View;
