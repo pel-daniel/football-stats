@@ -64,7 +64,7 @@ export const TournamentPage = () => {
                   key={view}
                 >
                   <img
-                    src={`/icons/${view}.svg`}
+                    src={`/icons/${view}.png`}
                     alt={`${view} logo`}
                     className={styles['icon']}
                   />
