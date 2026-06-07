@@ -15,9 +15,7 @@ export const TournamentPage = () => {
   const { name, year } = useParams();
   const [searchParams] = useSearchParams();
 
-  const compact = searchParams.get("compact") == "true";
   const activeView = searchParams.get("view") || "groups" as View;
-  searchParams.entries()
 
   useEffect(() => {
     const fetchData = async (name: string, year: number) => {
@@ -32,7 +30,7 @@ export const TournamentPage = () => {
   }, []);
 
   return (
-    <div className={classNames({ compact: compact })}>
+    <div>
       { tournament && (
         <div>
           <div className="flex-space-between mb-12">

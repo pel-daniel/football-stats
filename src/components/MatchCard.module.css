@@ -16,7 +16,7 @@
   width: 10ch;
 }
 
-:global(.compact) {
+@media screen and (max-width: 1200px) {
   .team-name {
     display: none;
   }
