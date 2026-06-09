@@ -12,14 +12,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --color-group-1: #2dd4bf;
-  --color-group-2: #fb923c;
-  --color-group-3: #a78bfa;
-  --color-group-4: #facc15;
-  --color-group-5: #38bdf8;
-  --color-group-6: #f472b6;
-  --color-group-7: #a3e635;
-  --color-group-8: #e63535;
+  --color-group-1: oklch(78.453% 0.13254 181.95);
+  --color-group-2: oklch(75.763% 0.15899 55.922);
+  --color-group-3: oklch(84.932% 0.2073 128.868);
+  --color-group-4: oklch(70.897% 0.15927 293.536);
+  --color-group-5: oklch(86.055% 0.17305 91.942);
+  --color-group-6: oklch(53.525% 0.13127 147.38);
+  --color-group-7: oklch(75.353% 0.13906 232.691);
+  --color-group-8: oklch(72.525% 0.17527 349.733);
+  --color-group-9: oklch(41.991% 0.19639 316.985);
+  --color-group-10: oklch(59.675% 0.02586 258.413);
+  --color-group-11: oklch(60.677% 0.21289 26.322);
+  --color-group-12: oklch(45.413% 0.13296 260.536);
 }
 
 a {
