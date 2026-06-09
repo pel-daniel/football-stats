@@ -78,7 +78,7 @@ export const TournamentPage = () => {
             { activeView === "groups" && (
               <div className={styles['groups']}>
                 {tournament.groups.map((group, index) =>
-                  <GroupCard group={group} index={index + 1} key={group.name} />
+                  <GroupCard group={group} index={index + 1} key={group.name.replaceAll(" ", "-")} />
                 )}
               </div>
             )}
