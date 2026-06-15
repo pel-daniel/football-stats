@@ -19,34 +19,37 @@ export const MatchCard = (
 
   return (
     <div
-      className={classNames(styles["match"], styles[`match-${direction}`])}
       style={{ "--color-group": `var(--color-group-${groupIndex})` } as CSSProperties}
     >
-      <div className="flex">
-        <Flag team={match.team1} />
+      <div>{match.date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
 
-        <div className={styles["team-name"]}>
-          {match.team1.name}
+      <div className={classNames(styles["match"], styles[`match-${direction}`])} >
+        <div className="flex">
+          <Flag team={match.team1} />
+
+          <div className={styles["team-name"]}>
+            {match.team1.name}
+          </div>
+
+          <div>
+            {fullTimeScore1}
+            {score1 !== undefined && ` (${score1})`}
+          </div>
         </div>
 
-        <div>
-          {fullTimeScore1}
-          {score1 !== undefined && ` (${score1})`}
-        </div>
-      </div>
+        <div className={styles["divider"]}>—</div>
 
-      <div className={styles["divider"]}>—</div>
+        <div className={classNames("flex", styles["team2"])}>
+          <Flag team={match.team2} />
 
-      <div className={classNames("flex", styles["team2"])}>
-        <Flag team={match.team2} />
+          <div className={styles["team-name"]}>
+            {match.team2.name}
+          </div>
 
-        <div className={styles["team-name"]}>
-          {match.team2.name}
-        </div>
-
-        <div>
-          {fullTimeScore2}
-          {score2 !== undefined && ` (${score2})`}
+          <div>
+            {fullTimeScore2}
+            {score2 !== undefined && ` (${score2})`}
+          </div>
         </div>
       </div>
     </div>

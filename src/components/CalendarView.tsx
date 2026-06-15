@@ -8,7 +8,7 @@ import styles from './CalendarView.module.css';
 
 export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
   const matchesByDate = tournament.matches.reduce((acc: Record<string, Match[]>, match) => {
-    const key = match.date;
+    const key = match.date.toLocaleDateString('en-CA');
     if (!acc[key]) acc[key] = [];
     acc[key].push(match);
     return acc;
@@ -42,7 +42,7 @@ export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
             </div>
 
             <div className="flex-column">
-              {matches.map((match, index) =>
+              {matches.sort((a, b) => a.date.getTime() - b.date.getTime()).map((match, index) =>
                 <MatchCard
                   match={match}
                   groupIndex={getGroupIndex(match.team1.code, tournament.groups)}

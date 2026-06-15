@@ -14,9 +14,6 @@ export const TeamRow = ({ team }: { team: Team }) => {
   const today = new Date();
   const tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1);
-  const timezone = today.toLocaleDateString(
-    undefined, {day:'2-digit', timeZoneName: 'short' }
-  ).substring(4);
 
   return (
     <div>
@@ -33,7 +30,6 @@ export const TeamRow = ({ team }: { team: Team }) => {
 
           <div className={styles["match-result-row"]}>
             { team.matches.map((match, index) => {
-              const date = new Date(`${match.date.replace(/-/g, "/")} ${timezone}`);
               const againstTeam = match.team1.code !== team.code ? match.team1 : match.team2;
 
               return (
@@ -42,8 +38,8 @@ export const TeamRow = ({ team }: { team: Team }) => {
                     styles["match-result"],
                     styles[`match-result-${getMatchResult(match, team.code)}`],
                     {
-                      [styles["match-result-today"]]: today.toDateString() === date.toDateString(),
-                      [styles["match-result-tomorrow"]]: tomorrow.toDateString() === date.toDateString()
+                      [styles["match-result-today"]]: today.toDateString() === match.date.toDateString(),
+                      [styles["match-result-tomorrow"]]: tomorrow.toDateString() === match.date.toDateString()
                     }
                   )}
                   key={`${againstTeam.code}-${index}`}

@@ -64,8 +64,7 @@ interface TeamScore {
 export type TeamScores = Record<ApiTeam['code'], TeamScore>;
 
 export interface Match {
-  date: string;
-  time: string;
+  date: Date;
   team1: ApiTeam;
   team2: ApiTeam;
   score: ApiScore;
@@ -109,6 +108,7 @@ const getScore = (match: ApiMatch): ApiScore => {
 const convertApiMatchToMatch = (match: ApiMatch): Match => {
   return {
     ...match,
+    date: new Date(Date.parse(`${match.date} ${match.time}`)),
     team1: { name: match.team1, code: countryToIso2[match.team1] },
     team2: { name: match.team2, code: countryToIso2[match.team2] },
     score: getScore(match)
