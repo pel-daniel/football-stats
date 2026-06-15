@@ -18,12 +18,13 @@ export const MatchCard = (
   const score2 = penaltiesScore2 || extraTimeScore2;
 
   return (
-    <div
-      style={{ "--color-group": `var(--color-group-${groupIndex})` } as CSSProperties}
-    >
+    <div>
       <div>{match.date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
 
-      <div className={classNames(styles["match"], styles[`match-${direction}`])} >
+      <div
+        style={{ "--color-group": `var(--color-group-${groupIndex})` } as CSSProperties}
+        className={classNames(styles["match"], styles[`match-${direction}`])}
+      >
         <div className="flex">
           <Flag team={match.team1} />
 
