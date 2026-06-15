@@ -21,7 +21,7 @@ export const MatchCard = (
     <div className={styles[`match-${direction}`]}>
       <div className="flex">
         <div className={styles["match-date"]}>
-          {match.date.toLocaleDateString('default', { day: 'numeric', month: 'long' })},
+          {match.date.toLocaleDateString('default', { day: 'numeric', month: 'long', weekday: 'short' })} @ 
         </div>
         <div>
           {match.date.toLocaleTimeString('default', { hour: '2-digit', minute: '2-digit' })}
