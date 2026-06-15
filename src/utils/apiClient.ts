@@ -106,9 +106,14 @@ const getScore = (match: ApiMatch): ApiScore => {
 }
 
 const convertApiMatchToMatch = (match: ApiMatch): Match => {
+  const [time, timezone] = match.time.split(' ');
+  const offsetString = timezone.replace('UTC', '');
+  const offsetSign = offsetString[0];
+  const paddedOffset = offsetString.slice(1).padStart(2, '0');
+
   return {
     ...match,
-    date: new Date(Date.parse(`${match.date} ${match.time}`)),
+    date: new Date(Date.parse(`${match.date} ${time}:00${offsetSign}${paddedOffset}00`)),
     team1: { name: match.team1, code: countryToIso2[match.team1] },
     team2: { name: match.team2, code: countryToIso2[match.team2] },
     score: getScore(match)
