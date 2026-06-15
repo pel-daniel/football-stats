@@ -19,7 +19,7 @@ export const MatchCard = (
 
   return (
     <div className={styles[`match-${direction}`]}>
-      <div className="flex">
+      <div className={classNames("flex", styles["match-datetime"])}>
         <div className={styles["match-date"]}>
           {match.date.toLocaleDateString('default', { day: 'numeric', month: 'long', weekday: 'short' })} @ 
         </div>

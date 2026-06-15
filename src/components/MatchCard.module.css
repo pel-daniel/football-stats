@@ -1,5 +1,9 @@
-.match-date {
-  display: none;
+.match-datetime {
+  opacity: .75;
+
+  .match-date {
+    display: none;
+  }
 }
 
 .match {
