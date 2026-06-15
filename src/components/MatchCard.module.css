@@ -1,3 +1,7 @@
+.match-date {
+  display: none;
+}
+
 .match {
   display: flex;
   flex-direction: column;
@@ -6,31 +10,35 @@
   border-left: 4px solid var(--color-group);
   border-radius: 2px;
   padding: 4px;
+
+  .divider {
+    display: none;
+  }
 }
 
 .match:hover {
   background-color: color-mix(in srgb, var(--color-group) 10%, transparent);
 }
 
-.match {
-  .divider {
-    display: none;
-  }
-}
-
 .match-horizontal {
-  flex-direction: row;
-  align-items: center;
-
-  .divider {
+  .match-date {
     display: block;
   }
 
-  .team2 {
-    flex-direction: row-reverse;
+  .match {
+    flex-direction: row;
+    align-items: center;
 
-    .team-name {
-      text-align: right;
+    .divider {
+      display: block;
+    }
+
+    .team2 {
+      flex-direction: row-reverse;
+
+      .team-name {
+        text-align: right;
+      }
     }
   }
 }

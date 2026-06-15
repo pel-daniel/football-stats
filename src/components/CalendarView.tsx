@@ -15,7 +15,7 @@ export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
   }, {});
   const daysOfWeek = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
   const today = new Date();
-  const timezone = today.toLocaleDateString(undefined, {day:'2-digit', timeZoneName: 'short' }).substring(4);
+  const timezone = today.toLocaleDateString(undefined, { day:'2-digit', timeZoneName: 'short' }).substring(4);
 
   return (
     <div className={styles["calendar-grid"]}>
