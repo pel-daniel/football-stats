@@ -4,7 +4,7 @@ import { Link, useParams, useSearchParams } from 'react-router';
 
 import { getTournament, Tournament } from '../utils/apiClient';
 import { CalendarView } from '../components/CalendarView';
-import { GroupCard } from '../components/GroupCard';
+import { GroupView } from '../components/GroupView';
 
 import styles from './TournamentPage.module.css';
 
@@ -75,14 +75,7 @@ export const TournamentPage = () => {
           </div>
 
           <div>
-            { activeView === "groups" && (
-              <div className={styles['groups']}>
-                {tournament.groups.map((group, index) =>
-                  <GroupCard group={group} index={index + 1} key={group.name.replaceAll(" ", "-")} />
-                )}
-              </div>
-            )}
-
+            { activeView === "groups" && <GroupView tournament={tournament} /> }
             { activeView === "calendar" && <CalendarView tournament={tournament} /> }
 
           </div>
