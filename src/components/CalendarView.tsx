@@ -9,7 +9,11 @@ import styles from './CalendarView.module.css';
 export const CalendarView = ({ tournament }: { tournament: Tournament }) => {
   const matchesByDate = tournament.matches.reduce((acc: Record<string, Match[]>, match) => {
     const key = match.date.toLocaleDateString('en-CA');
-    if (!acc[key]) acc[key] = [];
+
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+
     acc[key].push(match);
     return acc;
   }, {});

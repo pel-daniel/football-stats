@@ -1,0 +1,11 @@
+.bracket {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.round {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

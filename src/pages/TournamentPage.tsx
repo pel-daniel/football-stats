@@ -5,6 +5,7 @@ import { Link, useParams, useSearchParams } from 'react-router';
 import { getTournament, Tournament } from '../utils/apiClient';
 import { CalendarView } from '../components/CalendarView';
 import { GroupView } from '../components/GroupView';
+import { BracketView } from '../components/BracketView';
 
 import styles from './TournamentPage.module.css';
 
@@ -57,7 +58,7 @@ export const TournamentPage = () => {
             </div>
 
             <div className="flex radio-group">
-              { ["groups", "calendar"].map(view => (
+              { ["groups", "calendar", "bracket"].map(view => (
                 <Link
                   to={{ search: `?view=${view}` }}
                   className={classNames('radio-button', { active: view == activeView }) }
@@ -77,7 +78,7 @@ export const TournamentPage = () => {
           <div>
             { activeView === "groups" && <GroupView tournament={tournament} /> }
             { activeView === "calendar" && <CalendarView tournament={tournament} /> }
-
+            { activeView === "bracket" && <BracketView tournament={tournament} /> }
           </div>
         </div>
       )}
