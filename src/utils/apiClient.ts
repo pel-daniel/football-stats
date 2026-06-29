@@ -65,6 +65,7 @@ export type TeamScores = Record<ApiTeam['code'], TeamScore>;
 
 export interface Match {
   date: Date;
+  round: string;
   team1: ApiTeam;
   team2: ApiTeam;
   score: ApiScore;
@@ -107,7 +108,7 @@ const getScore = (match: ApiMatch): ApiScore => {
 
 const convertApiMatchToMatch = (match: ApiMatch): Match => {
   const [time, timezone] = match.time.split(' ');
-  const offsetString = timezone.replace('UTC', '');
+  const offsetString = timezone ? timezone.replace('UTC', '') : "-00";
   const offsetSign = offsetString[0];
   const paddedOffset = offsetString.slice(1).padStart(2, '0');
 
